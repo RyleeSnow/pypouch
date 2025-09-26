@@ -11,6 +11,7 @@ This package provides various utility functions for:
 - String formatting
 - Function utilities
 - Display utilities
+- Notification services
 
 Usage:
     from pypouch import *
@@ -52,6 +53,9 @@ from .io_ops import custom_read_csv, custom_save_csv
 
 # Logger setup
 from .logger_utils import setup_logger
+
+# Notification utilities
+from .notification_utils import email_notification, wechat_notification
 
 # Precision control
 from .precision_control import _format_decimal, control_decimal_precision
@@ -97,4 +101,8 @@ __all__ = [
     
     # Logger
     "setup_logger",
+    
+    # Notifications
+    "email_notification",
+    "wechat_notification",
 ]

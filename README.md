@@ -17,6 +17,7 @@ PyPouch provides a collection of utility functions designed to streamline common
 - **🔄 Type Conversions**: Safe and reliable column type conversions
 - **📁 I/O Operations**: Enhanced CSV reading/writing with optional Polars backend
 - **📋 Logging**: Structured logging setup with customizable formatters
+- **📢 Notifications**: Email and WeChat message notifications
 
 <br>
 
@@ -53,6 +54,11 @@ col_to_float(df, ["revenue", "cost"])
 # Enhanced I/O - Read/write CSV with optimizations
 df = custom_read_csv("data.csv", "./input", use_polars=True)
 custom_save_csv(df, "./output", "results.csv")
+
+# Notifications - Send messages via email or WeChat
+email_notification("Job Complete", "Data processing finished", 
+                  mail_host, mail_user, mail_pass, sender, receivers)
+wechat_notification("Alert", "Process completed successfully", sendkey)
 ```
 
 <br>
@@ -67,6 +73,7 @@ custom_save_csv(df, "./output", "results.csv")
 | `datatype_utils` | Type conversions | `col_to_str()`, `col_to_float()`, `col_to_int()` |
 | `io_ops` | File I/O | `custom_read_csv()`, `custom_save_csv()` |
 | `logger_utils` | Logging setup | `setup_logger()` with colored output |
+| `notification_utils` | Message notifications | `email_notification()`, `wechat_notification()` |
 
 <br>
 
