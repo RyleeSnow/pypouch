@@ -3,8 +3,10 @@ from __future__ import annotations
 import gc
 import os
 from pathlib import Path
+from types import SimpleNamespace
 
 import pandas as pd
+import yaml
 
 
 def custom_read_csv(
@@ -122,3 +124,24 @@ def custom_save_csv(df: pd.DataFrame, data_folder: str, file_name: str, hide_pri
 
     if not hide_print:
         print(f"Saved {df.shape[0]} rows and columns are: {df.columns.to_list()}")
+
+
+def yaml_to_object(yaml_path: str, to_object: bool = True) -> dict | SimpleNamespace:
+    """
+    Read YAML configuration file and return as dictionary or SimpleNamespace object.
+
+    Args:
+        - yaml_file (str): YAML file path.
+        - to_object (bool, optional): Whether to transform to Python SimpleNamespace object. Defaults to True.
+
+    Returns:
+        - dict | SimpleNamespace: Configuration data as dictionary or SimpleNamespace object
+    """
+
+    with open(yaml_path, encoding="utf-8") as file:
+        data = yaml.safe_load(file)
+
+    if to_object:
+        data = SimpleNamespace(**data)
+
+    return data

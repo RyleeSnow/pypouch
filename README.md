@@ -56,9 +56,10 @@ df_precise = control_decimal_precision(df, ["price", "amount"], 2)
 col_to_str(df, ["id", "category"])
 col_to_float(df, ["revenue", "cost"])
 
-# Enhanced I/O - Read/write CSV with optimizations
+# Enhanced I/O - Read/write CSV with optimizations and YAML configs
 df = custom_read_csv("data.csv", "./input", use_polars=True)
 custom_save_csv(df, "./output", "results.csv")
+config = yaml_to_object("config.yaml")  # Load YAML as SimpleNamespace object
 
 # Notifications - Send messages via email or WeChat
 email_notification("Job Complete", "Data processing finished", 
@@ -76,7 +77,7 @@ wechat_notification("Alert", "Process completed successfully", sendkey)
 | `precision_control` | Decimal precision | `control_decimal_precision()` for accurate rounding |
 | `data_ops` | DataFrame operations | `custom_dfs_concat()`, `fix_decimal_id()` |
 | `datatype_utils` | Type conversions | `col_to_str()`, `col_to_float()`, `col_to_int()` |
-| `io_ops` | File I/O | `custom_read_csv()`, `custom_save_csv()` |
+| `io_ops` | File I/O | `custom_read_csv()`, `custom_save_csv()`, `yaml_to_object()` |
 | `logger_utils` | Logging setup | `setup_logger()` with colored output |
 | `notification_utils` | Message notifications | `email_notification()`, `wechat_notification()` |
 

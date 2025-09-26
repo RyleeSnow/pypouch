@@ -37,6 +37,7 @@ Usage:
     # I/O operations
     df = custom_read_csv("data.csv", "./data")
     custom_save_csv(df, "./output", "result.csv")
+    config = yaml_to_object("config.yaml")
 """
 
 # Data operations (DataFrame manipulation and data cleaning)
@@ -54,7 +55,7 @@ from .datatype_utils import col_to_float, col_to_int, col_to_str
 from .func_utils import filter_kwargs
 
 # I/O operations
-from .io_ops import custom_read_csv, custom_save_csv
+from .io_ops import custom_read_csv, custom_save_csv, yaml_to_object
 
 # Logger setup
 from .logger_utils import setup_logger
@@ -98,6 +99,7 @@ __all__ = [
     # I/O operations
     "custom_read_csv",
     "custom_save_csv",
+    "yaml_to_object",
     
     # Formatting
     "fix_decimal_id",
