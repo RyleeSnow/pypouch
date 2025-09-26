@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+import concurrent.futures
+import os
+from typing import Callable
+
+import numpy as np
 import pandas as pd
 
 
@@ -161,3 +166,71 @@ def has_decimal_values(df: pd.DataFrame, col_name: str) -> float | None:
             continue
 
     return None
+
+
+def dataframe_mp(dataframe: pd.DataFrame, func: Callable, mp_cpus: int = None) -> pd.DataFrame:
+    """
+    Apply multiprocessing to a DataFrame by splitting it across multiple CPU cores
+
+    Args:
+        - dataframe (pd.DataFrame): Input DataFrame to process
+        - func (Callable): Function to apply to each DataFrame chunk
+        - mp_cpus (int, optional): Number of CPU cores to use. If None or <= 0, uses all available cores
+
+    Returns:
+        - pd.DataFrame: Concatenated result DataFrame from all processes
+    """
+
+    mp_cpus = mp_cpus if mp_cpus > 0 else os.cpu_count()
+
+    split_input_dataset = np.array_split(dataframe, mp_cpus)
+
+    with concurrent.futures.ProcessPoolExecutor(max_workers=mp_cpus) as executor:
+        results = list(executor.map(func, split_input_dataset))
+
+    output_dataset = pd.concat(results, ignore_index=True)
+
+    return output_dataset
+
+
+def lambda_groupby(lambda_func, groupby_df: pd.DataFrame, groupby_cols: list, result_col: str, reformat: bool = False):
+    """
+    Apply a lambda function to a grouped DataFrame and return results in a new DataFrame
+
+    Args:
+        - lambda_func (Callable): Lambda function to apply to each group
+            - Example: lambda x: (x['daily_price'] * x['daily_unit']).sum() / x['daily_unit'].sum()
+        - groupby_df (pd.DataFrame): Input DataFrame to group and process
+        - groupby_cols (list): List of column names to group by
+        - result_col (str): Name for the result column containing lambda function output
+        - reformat (bool | str, optional): Data type conversion for result column
+            - "float": Convert to float type
+            - "int": Convert to integer type
+            - False: No conversion (default)
+
+    Returns:
+        - pd.DataFrame: DataFrame with groupby columns and result column
+    """
+
+    df_temp = groupby_df.groupby(groupby_cols).apply(lambda_func)
+    df_temp = df_temp.to_dict()
+
+    temp_lst = []
+
+    for key, value in df_temp.items():
+        a = key[0]
+        b = key[1]
+        c = value
+        temp_lst.append([a, b, c])
+
+    new_col_lst = groupby_cols + [result_col]
+    df_temp = pd.DataFrame(data=np.array(temp_lst), columns=new_col_lst)
+
+    if reformat == "float":
+        df_temp[result_col] = df_temp[result_col].astype(float)
+    elif reformat == "int":
+        df_temp[result_col] = df_temp[result_col].astype(int)
+    else:
+        pass
+
+    return df_temp

@@ -49,6 +49,10 @@ time_elapsed = get_time_dif(start_time)  # Returns timedelta object
 df_clean = custom_dfs_concat([df1, df2, df3])
 df_fixed = fix_decimal_id(df, "id_column")
 
+# Advanced data processing with multiprocessing and groupby operations
+df_processed = dataframe_mp(large_df, processing_func, mp_cpus=4)
+df_aggregated = lambda_groupby(lambda x: x['sales'].sum(), df, ['region', 'month'], 'total_sales')
+
 # Precision control - Handle floating point precision
 df_precise = control_decimal_precision(df, ["price", "amount"], 2)
 
@@ -75,7 +79,7 @@ wechat_notification("Alert", "Process completed successfully", sendkey)
 |--------|---------|---------------|
 | `time_utils` | Date/time calculations | `CalendarCal` class for period management, `get_time_dif()` for timing |
 | `precision_control` | Decimal precision | `control_decimal_precision()` for accurate rounding |
-| `data_ops` | DataFrame operations | `custom_dfs_concat()`, `fix_decimal_id()` |
+| `data_ops` | DataFrame operations | `custom_dfs_concat()`, `fix_decimal_id()`, `dataframe_mp()`, `lambda_groupby()` |
 | `datatype_utils` | Type conversions | `col_to_str()`, `col_to_float()`, `col_to_int()` |
 | `io_ops` | File I/O | `custom_read_csv()`, `custom_save_csv()`, `yaml_to_object()` |
 | `logger_utils` | Logging setup | `setup_logger()` with colored output |

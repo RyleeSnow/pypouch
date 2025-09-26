@@ -3,7 +3,7 @@ PyPouch - A collection of utility functions for Python data processing
 
 This package provides various utility functions for:
 - Time and date operations
-- DataFrame manipulations  
+- DataFrame manipulations
 - Data type conversions
 - Precision control
 - I/O operations
@@ -15,25 +15,29 @@ This package provides various utility functions for:
 
 Usage:
     from pypouch import *
-    
+
     # Time operations
     cal = CalendarCal("202401")
     dates = cal.dates_lst
-    
+
     # Time difference calculation
     start_time = time.time()
     # ... some processing ...
     time_diff = get_time_dif(start_time)
-    
+
     # Data operations
     df_combined = custom_dfs_concat([df1, df2], ["id"])
-    
+
+    # Advanced data operations
+    df_processed = dataframe_mp(df, processing_func, mp_cpus=4)
+    df_grouped = lambda_groupby(lambda x: x['amount'].sum(), df, ['category'], 'total')
+
     # Type conversions
     col_to_str(df, ["col1", "col2"])
-    
-    # Precision control  
+
+    # Precision control
     df_precise = control_decimal_precision(df, ["amount"], 2)
-    
+
     # I/O operations
     df = custom_read_csv("data.csv", "./data")
     custom_save_csv(df, "./output", "result.csv")
@@ -44,8 +48,10 @@ Usage:
 from .data_ops import (
     combine_with_dollar_sign,
     custom_dfs_concat,
+    dataframe_mp,
     fix_decimal_id,
     has_decimal_values,
+    lambda_groupby,
 )
 
 # Data type operations (Type conversions)
@@ -80,36 +86,30 @@ __all__ = [
     # Time operations
     "CalendarCal",
     "get_time_dif",
-    
     # Data operations
     "custom_dfs_concat",
     "combine_with_dollar_sign",
-    "fix_decimal_id", 
+    "dataframe_mp",
+    "fix_decimal_id",
     "has_decimal_values",
-    
+    "lambda_groupby",
     # Type operations
     "col_to_int",
     "col_to_float",
     "col_to_str",
-    
     # Precision control
     "control_decimal_precision",
     "_format_decimal",
-    
     # I/O operations
     "custom_read_csv",
     "custom_save_csv",
     "yaml_to_object",
-    
     # Formatting
     "fix_decimal_id",
-    
     # Function utilities
     "filter_kwargs",
-    
     # Logger
     "setup_logger",
-    
     # Notifications
     "email_notification",
     "wechat_notification",
