@@ -87,6 +87,7 @@ wechat_notification("Alert", "Process completed successfully", sendkey)
 
 - Python 3.9+
 - pandas
+- yaml
 - Optional: polars (for enhanced I/O performance)
 
 <br>
