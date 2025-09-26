@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pypouch"
+version = "0.1"
+description = "A toolkit for Python programming"
+readme = "README.md"
+requires-python = ">=3.9.12"
