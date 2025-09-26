@@ -35,10 +35,15 @@ pip install pypouch
 from pypouch import *
 import pandas as pd
 
-# Time operations - Generate date ranges
+# Time operations - Generate date ranges and calculate time differences
 cal = CalendarCal("202401")
 weekly_dates = cal.dates_lst  # Get all dates in weekly format
 sundays = cal.wks_lst        # Get all Sundays in the month
+
+# Time difference calculation
+start_time = time.time()
+# ... your processing code here ...
+time_elapsed = get_time_dif(start_time)  # Returns timedelta object
 
 # Data operations - Clean and combine DataFrames  
 df_clean = custom_dfs_concat([df1, df2, df3])
@@ -67,7 +72,7 @@ wechat_notification("Alert", "Process completed successfully", sendkey)
 
 | Module | Purpose | Key Functions |
 |--------|---------|---------------|
-| `time_utils` | Date/time calculations | `CalendarCal` class for period management |
+| `time_utils` | Date/time calculations | `CalendarCal` class for period management, `get_time_dif()` for timing |
 | `precision_control` | Decimal precision | `control_decimal_precision()` for accurate rounding |
 | `data_ops` | DataFrame operations | `custom_dfs_concat()`, `fix_decimal_id()` |
 | `datatype_utils` | Type conversions | `col_to_str()`, `col_to_float()`, `col_to_int()` |

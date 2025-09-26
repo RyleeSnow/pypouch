@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import time
+from datetime import timedelta
+
 import pandas as pd
 
 
@@ -17,7 +20,7 @@ class CalendarCal:
 
         self.yr_mth = yr_mth
         assert len(yr_mth) == 6 and yr_mth.isdigit(), f"Invalid year-month format: {yr_mth}, should be YYYYMM with all digits"
-        
+
         self.yr = int(yr_mth[:4])
         assert 2000 <= self.yr <= 2050, f"Year {self.yr} is not within supported range (2000-2050)"
         self.mth = int(yr_mth[4:6])
@@ -73,3 +76,11 @@ class CalendarCal:
     def last_month(self) -> str:
         """Get the year-month string of last month (fixed format: YYYYMM)"""
         return (pd.Period(self.yr_mth, freq="M") - 1).strftime("%Y%m")
+
+
+def get_time_dif(start_time: time.time):
+    """Get the time difference between now and the start time"""
+
+    end_time = time.time()
+    time_dif = end_time - start_time
+    return timedelta(seconds=int(round(time_dif)))

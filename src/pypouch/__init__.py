@@ -20,6 +20,11 @@ Usage:
     cal = CalendarCal("202401")
     dates = cal.dates_lst
     
+    # Time difference calculation
+    start_time = time.time()
+    # ... some processing ...
+    time_diff = get_time_dif(start_time)
+    
     # Data operations
     df_combined = custom_dfs_concat([df1, df2], ["id"])
     
@@ -61,7 +66,7 @@ from .notification_utils import email_notification, wechat_notification
 from .precision_control import _format_decimal, control_decimal_precision
 
 # Time operations
-from .time_utils import CalendarCal
+from .time_utils import CalendarCal, get_time_dif
 
 # Display utilities (if exists)
 # Note: display_utils.py not found, skipping import
@@ -73,6 +78,7 @@ __author__ = "RyleeSnow"
 __all__ = [
     # Time operations
     "CalendarCal",
+    "get_time_dif",
     
     # Data operations
     "custom_dfs_concat",
