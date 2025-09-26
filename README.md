@@ -18,6 +18,8 @@ PyPouch provides a collection of utility functions designed to streamline common
 - **📁 I/O Operations**: Enhanced CSV reading/writing with optional Polars backend
 - **📋 Logging**: Structured logging setup with customizable formatters
 - **📢 Notifications**: Email and WeChat message notifications
+- **📋 List Operations**: Set operations for lists (intersection, difference, union, symmetric difference)
+- **📋 List Operations**: Set operations for lists (intersection, difference, union, symmetric difference)
 
 <br>
 
@@ -69,6 +71,14 @@ config = yaml_to_object("config.yaml")  # Load YAML as SimpleNamespace object
 email_notification("Job Complete", "Data processing finished", 
                   mail_host, mail_user, mail_pass, sender, receivers)
 wechat_notification("Alert", "Process completed successfully", sendkey)
+
+# List operations - Set operations for lists
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+common = list_inter(list1, list2)      # [3, 4]
+unique_in_1 = list_diff(list1, list2)  # [1, 2]
+all_items = list_union(list1, list2)   # [1, 2, 3, 4, 5, 6]
+sym_diff = list_sym_diff(list1, list2) # [1, 2, 5, 6]
 ```
 
 <br>
@@ -83,6 +93,7 @@ wechat_notification("Alert", "Process completed successfully", sendkey)
 | `datatype_utils` | Type conversions | `col_to_str()`, `col_to_float()`, `col_to_int()` |
 | `io_ops` | File I/O | `custom_read_csv()`, `custom_save_csv()`, `yaml_to_object()` |
 | `logger_utils` | Logging setup | `setup_logger()` with colored output |
+| `list_utils` | List operations | `list_inter()`, `list_diff()`, `list_union()`, `list_sym_diff()` |
 | `notification_utils` | Message notifications | `email_notification()`, `wechat_notification()` |
 
 <br>

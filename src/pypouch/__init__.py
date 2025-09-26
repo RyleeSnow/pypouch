@@ -10,6 +10,7 @@ This package provides various utility functions for:
 - Logging setup
 - String formatting
 - Function utilities
+- List operations
 - Display utilities
 - Notification services
 
@@ -42,6 +43,11 @@ Usage:
     df = custom_read_csv("data.csv", "./data")
     custom_save_csv(df, "./output", "result.csv")
     config = yaml_to_object("config.yaml")
+    
+    # List operations
+    common_items = list_inter(list1, list2)
+    unique_items = list_diff(list1, list2)
+    all_items = list_union(list1, list2)
 """
 
 # Data operations (DataFrame manipulation and data cleaning)
@@ -62,6 +68,9 @@ from .func_utils import filter_kwargs
 
 # I/O operations
 from .io_ops import custom_read_csv, custom_save_csv, yaml_to_object
+
+# List utilities
+from .list_utils import list_diff, list_inter, list_sym_diff, list_union
 
 # Logger setup
 from .logger_utils import setup_logger
